@@ -27,7 +27,3 @@ services:
       CEDALO_MC_USERNAME: cedalo
       CEDALO_MC_PASSWORD: mmcisawesome
       restart: always
-networks:
-  default:
-    external: true
-    name: proxy
