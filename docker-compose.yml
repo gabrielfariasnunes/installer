@@ -13,7 +13,7 @@ services:
   
   management-center:
     container_name: mosquitto-admin
-    image: cedalo/management-center:2
+    image: cedalo/installer:2-rpi
     ports:
       - 8088:8088
     depends_on:
