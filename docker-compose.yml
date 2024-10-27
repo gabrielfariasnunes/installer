@@ -1,0 +1,33 @@
+
+services:
+  mosquitto:
+    container_name: mosquitto
+    image: eclipse-mosquitto:2-openssl
+    expose:
+      - 8083
+    ports:
+      - 1883:1883
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+  
+  management-center:
+    container_name: mosquitto-admin
+    image: cedalo/management-center:2
+    ports:
+      - 8088:8088
+    depends_on:
+      - mosquitto
+    environment:
+      CEDALO_MC_BROKER_ID: mosquitto-2.0
+      CEDALO_MC_BROKER_NAME: Mosquitto 2.0
+      CEDALO_MC_BROKER_URL: mqtt://mosquitto:1883
+      CEDALO_MC_BROKER_USERNAME: cedalo
+      CEDALO_MC_BROKER_PASSWORD: ZRKIotc1kR
+      CEDALO_MC_USERNAME: cedalo
+      CEDALO_MC_PASSWORD: mmcisawesome
+      restart: always
+networks:
+  default:
+    external: true
+    name: proxy
